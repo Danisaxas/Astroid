@@ -22,4 +22,3 @@ qrcode
 twikit
 yt-dlp
 htmlwebshot
-akipy
