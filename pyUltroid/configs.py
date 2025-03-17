@@ -20,7 +20,7 @@ except ImportError:
 class Var:
     # mandatory
     API_ID = (
-        int(sys.argv[1]) if len(sys.argv) > 1 else config("API_ID", default=6, cast=int)
+        int(sys.argv[1]) if len(sys.argv) > 1 else int(config("API_ID", default="27533879", cast=str))
     )
     API_HASH = (
         sys.argv[2]
