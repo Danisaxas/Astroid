@@ -15,7 +15,7 @@ pillow
 apiclient
 opencv-python
 numpy
-beautifulsoup4 (bs4)
+beautifulsoup4
 apscheduler
 profanitydetector
 qrcode
