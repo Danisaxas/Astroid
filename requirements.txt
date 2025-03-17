@@ -9,3 +9,6 @@ requests
 aiohttp
 catbox-uploader
 cloudscraper
+GitPython
+requests
+pillow
