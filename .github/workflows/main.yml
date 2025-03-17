@@ -1,0 +1,40 @@
+name: Deploy Ultroid
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v2
+
+      - name: Configurar Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Instalar dependencias
+        run: |
+          sudo apt update
+          sudo apt install -y redis
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Configurar Redis
+        run: |
+          sudo systemctl start redis
+          sudo systemctl enable redis
+
+      - name: Ejecutar Ultroid
+        env:
+          API_ID: ${{ secrets.API_ID }}
+          API_HASH: ${{ secrets.API_HASH }}
+          SESSION: ${{ secrets.SESSION }}
+          REDIS_URI: ${{ secrets.REDIS_URI }}
+          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          bash resources/startup/startup.sh
