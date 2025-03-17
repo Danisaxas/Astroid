@@ -32,7 +32,7 @@ jobs:
           sudo redis-server &  # Inicia Redis en segundo plano
 
       - name: Dar permisos de ejecución a startup
-        run: chmod +x ./startup  # Asegúrate de usar la ruta correcta
+        run: chmod +x ./startup  # Cambia la ruta para apuntar al archivo en la raíz
 
       - name: Ejecutar script de inicio
         env:
@@ -43,4 +43,4 @@ jobs:
           REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
-          bash ./startup  # Ejecuta el script en el directorio raíz
+          bash ./startup  # Aquí apuntamos al archivo en la raíz
