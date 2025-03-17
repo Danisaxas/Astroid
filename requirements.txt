@@ -12,3 +12,14 @@ cloudscraper
 GitPython
 requests
 pillow
+apiclient
+opencv-python
+numpy
+beautifulsoup4 (bs4)
+apscheduler
+profanitydetector
+qrcode
+twikit
+yt-dlp
+htmlwebshot
+akipy
