@@ -42,5 +42,6 @@ jobs:
           REDIS_URI: ${{ secrets.REDIS_URI }}
           REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}  # Aquí agregamos el bot_token
         run: |
           bash ./startup  # Aquí apuntamos al archivo en la raíz
