@@ -22,3 +22,8 @@ qrcode
 twikit
 yt-dlp
 htmlwebshot
+google-api-python-client
+PyPDF2
+pytz
+twikit
+youtubesearchpython
