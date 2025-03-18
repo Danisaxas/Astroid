@@ -19,8 +19,10 @@ except ImportError:
 
 class Var:
     # mandatory
-    API_ID = (
-        int(sys.argv[1]) if len(sys.argv) > 1 else config("API_ID", default=6, cast=int)
+    try:
+    API_ID = int(config("API_ID"))
+except (ValueError, TypeError):
+    raise ValueError("Error: API_ID no es un número válido o está vacío en .env")
     )
     API_HASH = (
         sys.argv[2]
