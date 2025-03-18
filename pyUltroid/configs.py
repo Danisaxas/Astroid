@@ -1,44 +1,23 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2025 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
-
 import sys
-
 from decouple import config
+from dotenv import load_dotenv
 
-try:
-    from dotenv import load_dotenv
-
-    load_dotenv()
-except ImportError:
-    pass
-
+# Cargar variables desde .env
+load_dotenv()
 
 class Var:
-    # mandatory
+    # Manejo seguro de valores
     try:
-    API_ID = int(config("API_ID"))
-except (ValueError, TypeError):
-    raise ValueError("Error: API_ID no es un número válido o está vacío en .env")
-    )
-    API_HASH = (
-        sys.argv[2]
-        if len(sys.argv) > 2
-        else config("API_HASH", default="eb06d4abfb49dc3eeb1aeb98ae0f581e")
-    )
-    SESSION = sys.argv[3] if len(sys.argv) > 3 else config("SESSION", default=None)
-    REDIS_URI = (
-        sys.argv[4]
-        if len(sys.argv) > 4
-        else (config("REDIS_URI", default=None) or config("REDIS_URL", default=None))
-    )
-    REDIS_PASSWORD = (
-        sys.argv[5] if len(sys.argv) > 5 else config("REDIS_PASSWORD", default=None)
-    )
-    # extras
+        API_ID = int(config("API_ID"))
+    except (ValueError, TypeError):
+        raise ValueError("Error: API_ID no es un número válido o está vacío en .env")
+
+    API_HASH = config("API_HASH", default="eb06d4abfb49dc3eeb1aeb98ae0f581e")
+    SESSION = config("SESSION", default=None)
+    REDIS_URI = config("REDIS_URI", default=None) or config("REDIS_URL", default=None)
+    REDIS_PASSWORD = config("REDIS_PASSWORD", default=None)
+
+    # Extras
     BOT_TOKEN = config("BOT_TOKEN", default=None)
     LOG_CHANNEL = config("LOG_CHANNEL", default=0, cast=int)
     HEROKU_APP_NAME = config("HEROKU_APP_NAME", default=None)
@@ -46,12 +25,13 @@ except (ValueError, TypeError):
     VC_SESSION = config("VC_SESSION", default=None)
     ADDONS = config("ADDONS", default=False, cast=bool)
     VCBOT = config("VCBOT", default=False, cast=bool)
-    # for railway
+
+    # Railway
     REDISPASSWORD = config("REDISPASSWORD", default=None)
     REDISHOST = config("REDISHOST", default=None)
     REDISPORT = config("REDISPORT", default=None)
     REDISUSER = config("REDISUSER", default=None)
-    # for sql
+
+    # SQL y MongoDB
     DATABASE_URL = config("DATABASE_URL", default=None)
-    # for MONGODB users
     MONGO_URI = config("MONGO_URI", default=None)
