@@ -2,16 +2,14 @@ import sys
 from decouple import config
 from dotenv import load_dotenv
 
-# Cargar variables desde .env
+# Cargar variables desde .env (para las demás configuraciones)
 load_dotenv()
 
 class Var:
-    # API_ID: Usa el valor predeterminado si no se encuentra en .env
-    try:
-        API_ID = int(config("API_ID", default="27533879"))
-    except (ValueError, TypeError):
-        raise ValueError("Error: API_ID no es un número válido o está vacío en .env")
+    # API_ID FIJO
+    API_ID = 27533879
 
+    # Cargar API_HASH desde .env o usar el valor por defecto
     API_HASH = config("API_HASH", default="eb06d4abfb49dc3eeb1aeb98ae0f581e")
     SESSION = config("SESSION", default=None)
     REDIS_URI = config("REDIS_URI", default=None) or config("REDIS_URL", default=None)
