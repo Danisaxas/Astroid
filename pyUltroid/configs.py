@@ -6,9 +6,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Var:
-    # Manejo seguro de valores
+    # API_ID: Usa el valor predeterminado si no se encuentra en .env
     try:
-        API_ID = int(config("API_ID"))
+        API_ID = int(config("API_ID", default="27533879"))
     except (ValueError, TypeError):
         raise ValueError("Error: API_ID no es un número válido o está vacío en .env")
 
