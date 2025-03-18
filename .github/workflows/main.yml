@@ -12,8 +12,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Verificar archivos clonados
-        run: |
-          ls -R  # Verifica la estructura de archivos en el repositorio
+        run: ls -R  # Verifica la estructura de archivos en el repositorio
 
       - name: Configurar Python
         uses: actions/setup-python@v2
@@ -28,20 +27,15 @@ jobs:
           pip install -r requirements.txt
 
       - name: Iniciar Redis
+        run: sudo redis-server &  # Inicia Redis en segundo plano
+
+      - name: Cargar variables de entorno desde .env
         run: |
-          sudo redis-server &  # Inicia Redis en segundo plano
+          cp .env.example .env  # Asegúrate de tener un .env.example como base
+          export $(grep -v '^#' .env | xargs)
 
       - name: Dar permisos de ejecución a startup
-        run: chmod +x ./startup  # Cambia la ruta para apuntar al archivo en la raíz
+        run: chmod +x ./startup  # Cambia la ruta si está en otro lugar
 
       - name: Ejecutar script de inicio
-        env:
-          API_ID: ${{ secrets.API_ID }}
-          API_HASH: ${{ secrets.API_HASH }}
-          SESSION: ${{ secrets.SESSION }}
-          REDIS_URI: ${{ secrets.REDIS_URI }}
-          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}  # Aquí agregamos el bot_token
-        run: |
-          bash ./startup  # Aquí apuntamos al archivo en la raíz
+        run: bash ./startup  # Se ejecuta usando las variables de .env
